@@ -4,7 +4,7 @@
  * Date: 2019-05-29
  ***********************************************/
 //Imports
-// require("dotenv").config();
+require("dotenv").config();
 var keys = require("./keys.js");
 
 var service = process.argv[2];
