@@ -10,17 +10,22 @@ var moment = require("moment");
 * Process for concert-this selection
 */
 function concertThis(name) {
-    var queryURL = "https://rest.bandsintown.com/artists/" + name + "/events?app_id=codingbootcamp";
-    console.log(queryURL);
-    axios.get(queryURL)
-        .then(function (response) {
-            for (var event in response.data) {
-                var venueDetail = displayVenueDetail(response.data[event]);
-            }
-        })
-        .catch(function (error) {
-            console.log(error);
-        });
+    if (name) {
+        var queryURL = "https://rest.bandsintown.com/artists/" + name + "/events?app_id=codingbootcamp";
+        console.log(queryURL);
+        axios.get(queryURL)
+            .then(function (response) {
+                for (var event in response.data) {
+                    var venueDetail = displayVenueDetail(response.data[event]);
+                }
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
+    else {
+        console.log("Missing Artist/Group Input");
+    }
 }
 
 /**

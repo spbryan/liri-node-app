@@ -14,6 +14,10 @@ var spotify = new Spotify({
 * Process for spotify-this-song selection
 */
 function spotifyThisSong(songName) {
+    if (!songName) {
+        songName = "The Sign Ace of Base"; //default
+    }
+
     spotify
         .search({ type: 'track', query: songName })
         .then(function (response) {
