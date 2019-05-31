@@ -6,17 +6,16 @@
 var axios = require("axios");
 var moment = require("moment");
 
- /**
- * Process for concert-this selection
- */
+/**
+* Process for concert-this selection
+*/
 function concertThis(name) {
     var queryURL = "https://rest.bandsintown.com/artists/" + name + "/events?app_id=codingbootcamp";
     console.log(queryURL);
     axios.get(queryURL)
         .then(function (response) {
             for (var event in response.data) {
-                var venueDetail = createVenueDetail(response.data[event]);
-                console.log(venueDetail);
+                var venueDetail = displayVenueDetail(response.data[event]);
             }
         })
         .catch(function (error) {
@@ -25,22 +24,24 @@ function concertThis(name) {
 }
 
 /**
- * Build a string with venue details based on API response
+ * Display venue details based on API response
  * @param event 
  */
-function createVenueDetail(event) {
-    var venueDetail = "";
-    var venueName = event.venue.name;
-    var city = event.venue.city;
+function displayVenueDetail(event) {
+    console.log("Venue Name: " + event.venue.name);
+    console.log("Location: " + event.venue.city + getRegion(event));
+    console.log("Date: " + moment(event.datetime).format('MM/DD/YYYY'));
+    console.log("+--------------------------------------------+");
+}
+
+function getRegion(event) {
     var region = event.venue.region;
-    var eventDate = moment(event.datetime).format('MM/DD/YYYY');
-    venueDetail = venueName + " on " + eventDate + " - " + city;
     if (region) {
-        venueDetail += ", " + region;
-    } 
-    return venueDetail;
+        return ", " + region;
+    }
+    return "";
 }
 
 module.exports = {
-    concertThis : concertThis
+    concertThis: concertThis
 }

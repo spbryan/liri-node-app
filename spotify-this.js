@@ -27,7 +27,7 @@ function spotifyThisSong(songName) {
 }
 
 /**
- * Build a string with song details based on API response
+ * Display song details based on API response
  * @param item 
  */
 function displaySongDetail(item) {
