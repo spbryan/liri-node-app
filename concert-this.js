@@ -16,7 +16,7 @@ function concertThis(name) {
         axios.get(queryURL)
             .then(function (response) {
                 for (var event in response.data) {
-                    var venueDetail = displayVenueDetail(response.data[event]);
+                    var venueDetail = displayConcertDetail(response.data[event]);
                 }
             })
             .catch(function (error) {
@@ -29,10 +29,10 @@ function concertThis(name) {
 }
 
 /**
- * Display venue details based on API response
+ * Display concert details based on API response
  * @param event 
  */
-function displayVenueDetail(event) {
+function displayConcertDetail(event) {
     console.log("Venue Name: " + event.venue.name);
     console.log("Location: " + event.venue.city + getRegion(event));
     console.log("Date: " + moment(event.datetime).format('MM/DD/YYYY'));
