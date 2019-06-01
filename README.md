@@ -26,7 +26,7 @@ __From random.txt File__
 node liri.js do-what-it-says
 
 ## Video
-TBD
+![](test.mp4)
 
 ## Technology
 This application was written in JavaScript on NodeJs.  
