@@ -14,8 +14,6 @@ function movieThis(movieName) {
     }
 
     var queryUrl = "http://www.omdbapi.com/?t=" + movieName + "&y=&plot=short&apikey=trilogy";
-    console.log(queryUrl);
-
     axios.get(queryUrl)
     .then(function (response) {
         displayMovieDetail(response.data);

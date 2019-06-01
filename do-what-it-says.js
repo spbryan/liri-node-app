@@ -4,7 +4,7 @@
  * Date: 2019-05-29
  ***********************************************/
 var fs = require("fs");
-// var command = require("./command.js");
+var readline = require('readline');
 var service = "";
 var name = "";
 
@@ -13,20 +13,23 @@ var name = "";
  */
 function doWhatItSays() {
     var command = require("./command.js");
-    fs.readFile("random.txt", "utf8", function (error, data) {
-        if (error) {
-            return console.log(error);
-        }
-
-        var commandList = data.split(",");
+    var rl = readline.createInterface({
+        input: fs.createReadStream('random.txt')
+    });
+    
+    var line_no = 0;
+    
+    rl.on('line', function(line) {
+        line_no++;
+        var commandList = line.split(",");
         service = commandList[0];
-        name = commandList[1];
-
+        if (commandList.length === 2) {
+            name = commandList[1];
+            name = name.replace(/^"(.*)"$/, '$1');
+        }
         command.execute(service, name);
-        // for (var i = 0; i < commandList.length; i++) {
-
-        //     command.execute(service, name);
-        // }
+        service = "";
+        name = "";
     });
 }
 
